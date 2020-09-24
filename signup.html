@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign Up</title>
+    <style>
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background: #3d4f63;
+  color: white;
+  font-weight: 300;
+  text-align: center;
+}
+
+form {
+  width: 320px;
+  margin: 3rem auto;
+  text-align: left;
+}
+
+h1 {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+label, input {
+  display: block;
+}
+
+label {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1.5em;
+  color: #ccc;
+}
+
+label:hover, label:focus-within {
+  color: white;
+}
+
+input {
+  /* color: #5b7fa7; */
+  color: #27415e;
+  padding: 1em;
+  background: #ececec;
+  border: 3px solid #ececec;
+  margin-top: 0.5em;
+  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+input:hover {
+  background: white;
+  border-color: white;
+}
+
+input:focus {
+  background: white;
+  border-color: white;
+  outline: none;
+  border-color: hsl(170, 100%, 76%);
+  box-shadow: #2d3742 0px 12px 30px;
+}
+
+input.error {
+  border-color: #ff9191;
+}
+
+input.error:focus {
+  border-color: #e85f5f;
+}
+
+input[type=submit] {
+  background: hsl(190, 67%, 64%);
+  border-color: hsl(190, 67%, 64%);
+  color: #3d4f63;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  cursor: pointer;
+  animation: glow 3s infinite;
+  margin-top: 3em;
+}
+
+input[type=submit]:hover, input[type=submit]:focus {
+  animation: none;
+  background: hsl(170, 100%, 76%);
+  border-color: hsl(170, 100%, 76%);
+}
+
+@keyframes glow {
+  0% {
+    background: hsl(190, 67%, 64%);
+    border-color: hsl(190, 67%, 64%);
+  }
+  50% {
+    background: hsl(170, 67%, 64%);
+    border-color: hsl(170, 67%, 64%);
+  }
+  100% {
+    background: hsl(190, 67%, 64%);
+    border-color: hsl(190, 67%, 64%);
+  }
+}
+
+.main_error_message {
+  background: #e85f5f;
+  padding: 1em;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.main_error_message:before {
+  content: '!';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  border-radius: 1em;
+  text-align: center;
+  padding: 0.2em;
+  border: 2px solid white;
+  margin-right: 1em;
+}
+
+.error_message {
+  color: #ff9191;
+  margin: 0.5em 0;
+  text-transform: none;
+  font-weight: 500;
+}
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <form>
+        <h1 class="signup-header">Sign up</h1>
+        <label for="username" class="username_label">
+          Username
+          <input type="text" name="username" id="username">
+        </label>
+        <label for="password" class="password_label">
+          Password
+          <input type="password" name="password" id="password">
+        </label>
+        <input type="submit" value="Submit">
+      </form>
+    </main>
+    <script>
+      const clearErrors = () => {
+        const mainError = document.querySelector('.main_error_message');
+        if (mainError) mainError.remove();
+        document.querySelectorAll('.error').forEach(el => el.classList.remove('error'))
+        document.querySelectorAll('.error_message').forEach(el => el.remove())
+      };
+
+      const addError = ([input, message]) => {
+        input.classList.add('error');
+        input.insertAdjacentHTML('afterend', `<div class="error_message">${message}</div>`);
+      };
+
+      document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        clearErrors();
+        const errors = [];
+        const { username, password } = e.target;
+
+        if (username.value.trim() === '') {
+          errors.push([username, 'enter a username']);
+        }
+
+        const pwLength = 10;
+        if (password.value.trim().length < pwLength) {
+          errors.push([password, `must be at least ${pwLength} characters`]);
+        }
+
+        errors.forEach(addError);
+
+        if (errors.length > 0) {
+          document.querySelector('.signup-header').insertAdjacentHTML(
+            'afterend',
+            '<p class="main_error_message">Please correct the errors below</p>'
+          );
+        }
+      })
+    </script>
+  </body>
+</html>

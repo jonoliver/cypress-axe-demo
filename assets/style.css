@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "Avenir Next";
+  src: url("assets/font.woff");
+}
+
+body {
+  font-family: "Ubuntu", Helvetica, Arial, sans-serif;
+  text-align: center;
+  background: #1C4C55;
+  color: #4a909e;
+  margin: 0;
+}
+p {
+  font-size: 1.5rem;
+}
+.header {
+  margin: 15vh 0;
+}
+.header__main {
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+.header__sub {
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 500;
+  margin-top: 0;
+}
+.logo {
+  background: #76c3d4;
+  padding: 2rem 0;
+}
+.logo__img {
+  max-width: 18rem;
+  margin: 0 1rem;
+}
